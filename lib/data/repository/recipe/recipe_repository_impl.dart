@@ -16,6 +16,8 @@ class RecipeRepositoryImpl implements RecipeRepository {
   final StepsDataSource _stepsDataSource;
   final List<int> recipeIds = [];
 
+  bool isBookmarked(int id) => recipeIds.contains(id);
+
   RecipeRepositoryImpl(this._recipeDataSource, this._stepsDataSource);
 
   @override
@@ -130,4 +132,15 @@ class RecipeRepositoryImpl implements RecipeRepository {
       recipeIds.removeLast();
     }
   }
+
+  @override
+  void toggle(int id) {
+    if (recipeIds.contains(id)) {
+      recipeIds.remove(id);
+    } else {
+      recipeIds.add(id);
+    }
+  }
+
+  Set<int> get all => {...recipeIds};
 }

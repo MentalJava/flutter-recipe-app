@@ -16,7 +16,7 @@ class RecipeDataSourceImpl implements RecipeDataSource {
   @override
   Future<RecipeDto> getRecipe(int recipeId) async {
     final jsonString = await rootBundle.loadString('assets/json/recipe.json');
-    final List<Map<String, dynamic>> recipes = jsonDecode(jsonString);
+    final List<dynamic> recipes = jsonDecode(jsonString);
 
     return recipes
         .map((e) => RecipeDto.fromJson(e))

@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:recipe_app/core/di/di_setup.dart';
 import 'package:recipe_app/presentation/main/home/home_screen.dart';
 import 'package:recipe_app/presentation/main/main_screen.dart';
-import 'package:recipe_app/presentation/saved_recipes/saved_recipes_detail_view.dart';
+import 'package:recipe_app/presentation/main/ingredient/ingredient_screen.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_screen.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_screen.dart';
 import 'package:recipe_app/presentation/sign_in/sign_in_screen.dart';
@@ -35,11 +35,10 @@ final GoRouter router = GoRouter(
     ),
 
     GoRoute(
-      path: '${Routes.savedDetail}:id',
-
+      path: '${Routes.savedDetail}/:id',
       builder: (context, state) {
         final id = int.tryParse(state.pathParameters['id'] ?? '');
-        return SavedRecipesDetailView(recipeId: id!);
+        return IngredientScreen(recipeId: id!, ingredientViewModel: getIt());
       },
     ),
 

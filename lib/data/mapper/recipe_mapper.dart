@@ -20,6 +20,7 @@ extension RecipeMapper on RecipeDto {
       rating: rating as double,
       time: time as int,
       chef: chef ?? '',
+      address: address ?? '',
       ingredients: fromIngredients(ingredients!),
       category: categorySwitch(category ?? ''),
       step: [],

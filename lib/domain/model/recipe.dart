@@ -17,6 +17,7 @@ class Recipe with _$Recipe {
   final double rating;
   final int time;
   final String chef;
+  final String address;
   final List<Ingredients> ingredients;
   final List<Step> step;
 
@@ -30,5 +31,6 @@ class Recipe with _$Recipe {
     required this.ingredients,
     required this.category,
     required this.step,
+    required this.address,
   });
 }

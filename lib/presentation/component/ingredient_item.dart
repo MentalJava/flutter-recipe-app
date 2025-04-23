@@ -4,9 +4,10 @@ import 'package:recipe_app/ui/color_style.dart';
 import 'package:recipe_app/ui/text_font_style.dart';
 
 class IngredientItem extends StatelessWidget {
-  const IngredientItem({super.key, required this.item});
+  const IngredientItem({super.key, required this.item, required this.amount});
 
   final Ingredient item;
+  final int amount;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class IngredientItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       padding: const EdgeInsets.symmetric(vertical: 12),
-      margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+      margin: const EdgeInsets.symmetric(vertical: 5),
       width: double.infinity,
       child: ListTile(
         leading: ClipRRect(
@@ -24,12 +25,15 @@ class IngredientItem extends StatelessWidget {
           child: SizedBox(
             width: 52,
             height: 52,
-            child: Image.network(item.imageUrl, fit: BoxFit.cover),
+            child:
+                item.imageUrl.isNotEmpty
+                    ? Image.network(item.imageUrl, fit: BoxFit.cover)
+                    : Container(),
           ),
         ),
         title: Text(item.name, style: TextFontStyle.normalBold()),
         trailing: Text(
-          '${item.imageUrl.toString()}g',
+          '${amount}g',
           style: TextFontStyle.smallRegular(color: ColorStyle.gray3),
         ),
       ),

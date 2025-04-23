@@ -10,6 +10,7 @@ class RecipeDto {
   final String? chef;
   final int? time;
   final num? rating;
+  final String? address;
   final List<IngredientsDto>? ingredients;
   final List<StepDto>? steps;
 
@@ -21,6 +22,7 @@ class RecipeDto {
     this.chef,
     this.time,
     this.rating,
+    this.address,
     this.ingredients,
     this.steps,
   });
@@ -37,6 +39,7 @@ class RecipeDto {
       chef: json['chef'] as String?,
       time: json['time'],
       rating: json['rating'] as num?,
+      address: json['address'] as String?,
       ingredients:
           (json['ingredients'] as List<dynamic>?)
               ?.map((e) => IngredientsDto.fromJson(e))

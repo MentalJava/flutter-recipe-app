@@ -1,22 +1,24 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:recipe_app/domain/model/recipe.dart';
 
-part 'saved_recipes_detail_state.freezed.dart';
+part 'ingredient_state.freezed.dart';
 
 // ignore_for_file: annotate_overrides
 @freezed
-class SavedRecipesDetailState with _$SavedRecipesDetailState {
-  final List<Recipe> recipes;
+class IngredientState with _$IngredientState {
+  Recipe? recipe;
   final bool isLoading;
   final bool isBookmarked;
   final String errorMessage;
   final Set<int> bookmarkedRecipes;
+  final int tabIndex;
 
-  SavedRecipesDetailState({
-    this.recipes = const [],
+  IngredientState({
+    this.recipe,
     this.isLoading = false,
     this.errorMessage = '',
     this.bookmarkedRecipes = const {},
     this.isBookmarked = false,
+    this.tabIndex = 0,
   });
 }

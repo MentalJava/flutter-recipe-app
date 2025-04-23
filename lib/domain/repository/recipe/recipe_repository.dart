@@ -15,4 +15,5 @@ abstract interface class RecipeRepository {
   );
   Future<List<Recipe>> getRecentRecipes();
   Future<void> saveRecentRecipes(List<int> ids);
+  void toggle(int id);
 }

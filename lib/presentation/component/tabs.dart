@@ -38,7 +38,7 @@ class Tabs extends StatelessWidget {
                         : ColorStyle.white,
                 borderRadius: BorderRadius.circular(10),
               ),
-              width: 150,
+              width: 140,
               child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Text(

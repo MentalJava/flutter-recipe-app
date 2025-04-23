@@ -13,11 +13,14 @@ import 'package:recipe_app/data/repository/step/step_repository_impl.dart';
 import 'package:recipe_app/domain/repository/bookmark/bookmark_repository.dart';
 import 'package:recipe_app/domain/repository/recipe/recipe_repository.dart';
 import 'package:recipe_app/domain/repository/step/step_repository.dart';
+import 'package:recipe_app/domain/use_case/saved_recipe/get_saved_recipe_detail_use_case.dart';
 import 'package:recipe_app/domain/use_case/saved_recipe/get_saved_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/search_recipe/get_filter_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/search_recipe/get_recent_search_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/search_recipe/get_search_recipes_use_case.dart';
 import 'package:recipe_app/domain/use_case/search_recipe/save_recent_recipes_use_case.dart';
+import 'package:recipe_app/domain/use_case/toggle_use_case.dart';
+import 'package:recipe_app/presentation/main/ingredient/ingredient_view_model.dart';
 import 'package:recipe_app/presentation/saved_recipes/saved_recipes_view_model.dart';
 import 'package:recipe_app/presentation/search_recipes/search_recipes_view_model.dart';
 import 'package:recipe_app/presentation/splash/splash_view_model.dart';
@@ -44,6 +47,12 @@ void diSetup() {
     () => SearchRecipesViewModel(getIt(), getIt(), getIt(), getIt()),
   );
   getIt.registerFactory(() => SplashViewModel());
+  getIt.registerFactory(
+    () => IngredientViewModel(
+      getSavedRecipeDetailUseCase: getIt(),
+      toggleUseCase: getIt(),
+    ),
+  );
 
   // UseCase
   getIt.registerSingleton(
@@ -58,4 +67,8 @@ void diSetup() {
   getIt.registerSingleton(
     GetRecentSearchRecipesUseCase(recipeRepository: getIt()),
   );
+  getIt.registerSingleton(
+    GetSavedRecipeDetailUseCase(recipeRepository: getIt()),
+  );
+  getIt.registerSingleton(ToggleUseCase(recipeRepository: getIt()));
 }
