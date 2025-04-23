@@ -10,6 +10,7 @@ import 'package:recipe_app/presentation/sign_in/sign_in_screen.dart';
 import 'package:recipe_app/presentation/sign_up/sign_up_screen.dart';
 import 'package:recipe_app/presentation/splash/splash_screen.dart';
 import 'package:recipe_app/core/routing/routes.dart';
+import 'package:recipe_app/ui/color_style.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: Routes.splash,
@@ -45,20 +46,11 @@ final GoRouter router = GoRouter(
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         return MainScreen(
-          bottomNavigationBar: NavigationBar(
-            onDestinationSelected: (int index) {
-              navigationShell.goBranch(index);
-            },
+          bottomNavigationBar: CustomBottomAppBar(
             selectedIndex: navigationShell.currentIndex,
-            destinations: const [
-              NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-              NavigationDestination(icon: Icon(Icons.bookmark), label: 'Saved'),
-              NavigationDestination(
-                icon: Icon(Icons.notifications),
-                label: 'Notification',
-              ),
-              NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
-            ],
+            onChanged: (value) {
+              navigationShell.goBranch(value);
+            },
           ),
           child: navigationShell,
         );
@@ -102,3 +94,42 @@ final GoRouter router = GoRouter(
     ),
   ],
 );
+
+class CustomBottomAppBar extends StatelessWidget {
+  final ValueChanged<int> onChanged;
+  final int selectedIndex;
+  const CustomBottomAppBar({
+    super.key,
+    required this.onChanged,
+    required this.selectedIndex,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      color: ColorStyle.white,
+      shape: const CircularNotchedRectangle(),
+      notchMargin: 6.0,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _buildIcon(0, 'home'),
+          _buildIcon(1, 'bookmark'),
+          const SizedBox(width: 24),
+          _buildIcon(2, 'notification'),
+          _buildIcon(3, 'profile'),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildIcon(int index, String name) {
+    final isSelected = index == selectedIndex;
+    final imageName = isSelected ? '${name}_fill' : name;
+    final path = 'assets/images/home/$imageName.png';
+    return GestureDetector(
+      child: Image.asset(path),
+      onTap: () => onChanged(index),
+    );
+  }
+}

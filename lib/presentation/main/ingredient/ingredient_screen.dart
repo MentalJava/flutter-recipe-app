@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_app/presentation/component/button/custom_button.dart';
-import 'package:recipe_app/presentation/component/button/small_button.dart';
 import 'package:recipe_app/presentation/component/ingredient_item.dart';
 import 'package:recipe_app/presentation/component/recipe_detail_card.dart';
 import 'package:recipe_app/presentation/component/step_card.dart';
